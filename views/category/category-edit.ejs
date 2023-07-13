@@ -1,0 +1,91 @@
+<%- include('../header') %> <%- include('../sidebar') %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2 justify-content-center">
+            <div class="col-sm-6">
+              <h1 class="text-center">
+                Edit Category
+              </h1>
+            </div>
+          </div>
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <!-- Default box -->
+            <div class="card">
+              <div class="card-body">
+
+                <form action="/category-edit/update/<%= obj.id %>" method="POST" role="form">
+
+                  <div class="form-group">
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" name="name" id="" placeholder="Input field"
+                      value="<%= obj.name %>" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="">Status</label>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="status" id="" value="1" <%=obj.status==1
+                              ? 'checked' : '' %> />
+                            Show
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="status" id="" value="0" <%=obj.status==0
+                              ? 'checked' : '' %> />
+                            Hide
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                          <i class="fa fa-edit" aria-hidden="true"></i>
+                          Update
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <div class="form-group float-right">
+                        <a href="/category" class="btn btn-default">
+                          <i class="fa-solid fa-arrow-left"></i> Cancel
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <%- include('../footer') %>
