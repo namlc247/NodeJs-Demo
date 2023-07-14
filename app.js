@@ -37,7 +37,6 @@ app.get('/category-delete/:id', (req, res) => {
   conn.query(sql_delete, [id], (err, result) => {
     if (err) {
       let msg = checkError(err);
-
       res.render('error', { code: err.errno, message: msg });
     } else {
       res.redirect('/category');
@@ -55,7 +54,6 @@ app.post('/category-add/create', (req, res) => {
   conn.query(sql_insert, [req.body], (err, result) => {
     if (err) {
       let msg = checkError(err);
-
       res.render('error', { code: err.errno, message: msg });
     } else {
       res.redirect('/category');
@@ -79,7 +77,6 @@ app.post('/category-edit/update/:id', (req, res) => {
   conn.query(sql_update, [req.body, id], (err, result) => {
     if (err) {
       let msg = checkError(err);
-
       res.render('error', { code: err.errno, message: msg });
     } else {
       res.redirect('/category');
