@@ -66,7 +66,11 @@ app.get('/category-edit/:id', (req, res) => {
   let sql_getInfo = 'SELECT * FROM category WHERE id = ?';
 
   conn.query(sql_getInfo, [id], (err, result) => {
-    res.render('category/category-edit', { obj: result ? result[0] : [] });
+    if (result.length > 0) {
+      res.render('category/category-edit', { obj: result[0] });
+    } else {
+      res.render('error', { code: 404, message: 'Page not found' });
+    }
   });
 });
 
