@@ -15,8 +15,8 @@ CREATE TABLE account
     email varchar(100) NOT NULL UNIQUE,
     password varchar(100) NOT NULL,
     role varchar(50) not null DEFAULT 'customer',
-    created_at date DEFAULT CURRENT_DATE(),
-    last_login datetime DEFAULT CURRENT_DATE()
+    created_at date DEFAULT NOW(),
+    last_login datetime DEFAULT NOW()
 );
 
 CREATE TABLE product
@@ -29,7 +29,7 @@ CREATE TABLE product
     category_id int NOT NULL,
     status tinyint NULL DEFAULT '1',
     description text NULL,
-    created_at date DEFAULT CURRENT_DATE(),
+    created_at date DEFAULT NOW(),
     FOREIGN KEY (category_id) REFERENCES category(id)
 );
 
@@ -38,7 +38,7 @@ CREATE TABLE favourite
     id int PRIMARY KEY AUTO_INCREMENT,
     account_id int NOT NULL,
     product_id int NOT NULL,
-    created_at date DEFAULT CURRENT_DATE(),
+    created_at date DEFAULT NOW(),
     FOREIGN KEY (account_id) REFERENCES account(id),
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
