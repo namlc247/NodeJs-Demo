@@ -63,4 +63,13 @@ VALUES
   (N'Quần ngố đôi đẹp', 100000, 0, 1, 2),
   (N'Áo sơ mi công sở 458', 350000, 35000, 1, 1),
   (N'Quần ngố đôi đẹp 458', 2000000, 200000, 1, 2);
-  
+
+INSERT INTO account
+  (name, email, password) 
+VALUES 
+  ('qwe', 'qwe@gmail.com', '123');
+
+INSERT INTO favourite
+  (account_id, product_id)
+VALUES
+  (1, 2);

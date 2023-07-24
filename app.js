@@ -14,6 +14,8 @@ app.get('/', (req, res) => {
 require('./routes/category')(app);
 require('./routes/api-category')(app);
 require('./routes/api-product')(app);
+require('./routes/api-account')(app);
+require('./routes/api-favourite')(app);
 
 app.listen(3000, () => {
   console.log('Server: http://localhost:' + 3000);

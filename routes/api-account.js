@@ -1,13 +1,8 @@
 const conn = require('../connect');
 
 module.exports = function (app) {
-  app.get('/api/product', function (req, res) {
-    let sql = `
-      SELECT
-      p.*, c.name AS category_name
-      FROM category AS c
-      JOIN product AS p ON p.category_id = c.id
-    `;
+  app.get('/api/account', function (req, res) {
+    let sql = 'SELECT * FROM account ORDER BY id DESC';
 
     conn.query(sql, function (err, result) {
       res.send({
@@ -17,8 +12,8 @@ module.exports = function (app) {
     });
   });
 
-  app.post('/api/product', function (req, res) {
-    let sql = 'INSERT INTO product SET ?';
+  app.post('/api/account', function (req, res) {
+    let sql = 'INSERT INTO account SET ?';
 
     conn.query(sql, req.body, function (err, result) {
       req.body.id = result.insertId;
@@ -29,16 +24,9 @@ module.exports = function (app) {
     });
   });
 
-  // hiển thị form chỉnh sửa khi click vào nút Sửa trên danh sách
-  app.get('/api/product/:id', function (req, res) {
+  app.get('/api/account/:id', function (req, res) {
     let id = req.params.id;
-    let sql = `
-      SELECT
-      p.*, c.name AS category_name
-      FROM category AS c
-      JOIN product AS p ON p.category_id = c.id
-      WHERE p.id = ?
-    `;
+    let sql = 'SELECT * FROM account WHERE id = ?';
 
     conn.query(sql, [id], function (err, data) {
       res.send({
@@ -48,10 +36,9 @@ module.exports = function (app) {
     });
   });
 
-  // hiển thị form chỉnh sửa khi click vào nút Sửa trên danh sách
-  app.delete('/api/product/:id', function (req, res) {
+  app.delete('/api/account/:id', function (req, res) {
     let id = req.params.id;
-    let sql = 'DELETE FROM product WHERE id = ?';
+    let sql = 'DELETE FROM account WHERE id = ?';
 
     conn.query(sql, [id], function (err, data) {
       res.send({
@@ -61,9 +48,9 @@ module.exports = function (app) {
     });
   });
 
-  app.put('/api/product/:id', function (req, res) {
+  app.put('/api/account/:id', function (req, res) {
     let id = req.params.id;
-    let sql = 'UPDATE product SET ? WHERE id = ?';
+    let sql = 'UPDATE account SET ? WHERE id = ?';
 
     conn.query(sql, [req.body, id], function (err, result) {
       req.body.id = id;
