@@ -57,12 +57,18 @@ VALUES
   (N'Áo vest', 0);
 
 INSERT INTO product
-  (name, price, sale_price, status, category_id) 
+  (name, price, category_id, image) 
 VALUES
-  (N'Áo sơ mi công sở', 200000, 0, 1, 1),
-  (N'Quần ngố đôi đẹp', 100000, 0, 1, 2),
-  (N'Áo sơ mi công sở 458', 350000, 35000, 1, 1),
-  (N'Quần ngố đôi đẹp 458', 2000000, 200000, 1, 2);
+  ('Furry hooded parka', 59, 1, 'assets/img/shop/shop-1.jpg'),
+  ('Flowy striped skirt', 49, 2, 'assets/img/shop/shop-2.jpg'),
+  ('Croc-effect bag', 89, 1, 'assets/img/shop/shop-3.jpg'),
+  ('Dark wash Xavi jeans', 79, 2, 'assets/img/shop/shop-4.jpg'),
+  ('Ankle-cuff sandals', 99, 2, 'assets/img/shop/shop-5.jpg'),
+  ('Contrasting sunglasses', 16, 3, 'assets/img/shop/shop-6.jpg'),
+  ('Circular pendant earrings', 27, 4, 'assets/img/shop/shop-7.jpg'),
+  ('Cotton T-Shirt', 109, 4, 'assets/img/shop/shop-8.jpg'),
+  ('Water resistant zips backpack', 18, 3, 'assets/img/shop/shop-9.jpg');
+
 
 INSERT INTO account
   (name, email, password) 
