@@ -2,7 +2,7 @@ const conn = require('../connect');
 
 module.exports = function (app) {
   app.get('/api/category', function (req, res) {
-    let sql = 'SELECT * FROM category ORDER BY id DESC';
+    let sql = 'SELECT * FROM category ORDER BY id ASC';
 
     conn.query(sql, function (err, result) {
       res.send({

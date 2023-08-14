@@ -46,34 +46,38 @@ CREATE TABLE favourite
 INSERT INTO category
   (name, status) 
 VALUES 
-  (N'Áo', 1),
-  (N'Quần Bò', 1),
-  (N'Dép', 0),
-  (N'Quần ngố', 0),
-  (N'Giày da', 0),
-  (N'Giày thể thao', 0),
-  (N'Áo bóng đá', 0),
-  (N'Dép quai hậu', 0),
-  (N'Áo vest', 0);
+  ('Women', 1),
+  ('Men', 1),
+  ('Bag', 1),
+  ('Accessories', 1),
+  ('Boots', 1);
 
 INSERT INTO product
-  (name, price, category_id, image) 
+  (name, price, sale_price, category_id, image) 
 VALUES
-  ('Furry hooded parka', 59, 1, 'assets/img/shop/shop-1.jpg'),
-  ('Flowy striped skirt', 49, 2, 'assets/img/shop/shop-2.jpg'),
-  ('Croc-effect bag', 89, 1, 'assets/img/shop/shop-3.jpg'),
-  ('Dark wash Xavi jeans', 79, 2, 'assets/img/shop/shop-4.jpg'),
-  ('Ankle-cuff sandals', 99, 2, 'assets/img/shop/shop-5.jpg'),
-  ('Contrasting sunglasses', 16, 3, 'assets/img/shop/shop-6.jpg'),
-  ('Circular pendant earrings', 27, 4, 'assets/img/shop/shop-7.jpg'),
-  ('Cotton T-Shirt', 109, 4, 'assets/img/shop/shop-8.jpg'),
-  ('Water resistant zips backpack', 18, 3, 'assets/img/shop/shop-9.jpg');
+  ('Buttons tweed blazer', 88, 26, 1, 'assets/img/product/product-1.jpg'),
+  ('Pink Shirt', 80, 0, 2, 'assets/img/product/product-2.jpg'),
+  ('Orange Skirt', 50, 5, 1, 'assets/img/product/product-3.jpg'),
+  ('Slim striped shirt', 100, 0, 2, 'assets/img/product/product-4.jpg'),
+  ('Fit corduroy shirt', 40, 4, 2, 'assets/img/product/product-5.jpg'),
+  ('Tropical Kimono', 59, 49, 1, 'assets/img/product/product-6.jpg'),
+  ('Contrasting sunglasses', 66, 0, 1, 'assets/img/product/product-7.jpg'),
+  ('Hawaii Shirt', 106, 33, 2, 'assets/img/product/product-8.jpg'),
+  ('Furry hooded parka', 59, 0, 1, 'assets/img/shop/shop-1.jpg'),
+  ('Flowy striped skirt', 49, 0, 3, 'assets/img/shop/shop-2.jpg'),
+  ('Croc-effect bag', 89, 12, 1, 'assets/img/shop/shop-3.jpg'),
+  ('Dark wash Xavi jeans', 79, 20, 2, 'assets/img/shop/shop-4.jpg'),
+  ('Ankle-cuff sandals', 99, 30, 5, 'assets/img/shop/shop-5.jpg'),
+  ('Contrasting sunglasses', 16, 0, 3, 'assets/img/shop/shop-6.jpg'),
+  ('Circular pendant earrings', 27, 5, 4, 'assets/img/shop/shop-7.jpg'),
+  ('Cotton T-Shirt', 109, 50, 4, 'assets/img/shop/shop-8.jpg'),
+  ('Water resistant zips backpack', 18, 0, 5, 'assets/img/shop/shop-9.jpg');
 
 
 INSERT INTO account
   (name, email, password) 
 VALUES 
-  ('qwe', 'qwe@gmail.com', '123');
+  ('Admin', 'abc@gmail.com', '123');
 
 INSERT INTO favourite
   (account_id, product_id)
