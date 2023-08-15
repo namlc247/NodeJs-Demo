@@ -1,8 +1,17 @@
 const conn = require('../connect');
 
 module.exports = function (app) {
-  app.get('/api/favourite', function (req, res) {
-    let sql = 'SELECT * FROM favourite';
+  app.get('/api/favourite/:account_id', function (req, res) {
+    let acc_id = req.params.account_id;
+
+    let sql = `
+      SELECT
+        p.*, f.created_at AS f_created_at,
+        (p.price - p.sale_price) AS final_price
+      FROM product AS p
+      JOIN favourite AS f ON f.product_id = p.id`;
+
+    sql += acc_id ? ` WHERE f.account_id = ${acc_id}` : '';
 
     conn.query(sql, function (err, result) {
       res.send({
@@ -12,37 +21,49 @@ module.exports = function (app) {
     });
   });
 
-  app.post('/api/favourite', function (req, res) {
+  app.post('/api/check-favourite', function (req, res) {
     let sqlCheck = 'SELECT * FROM favourite WHERE account_id = ? AND product_id = ?';
 
     conn.query(sqlCheck, [req.body.account_id, req.body.product_id], (err, data) => {
-      if (data.length > 0) {
-        let sqlDelete = 'DELETE FROM favourite WHERE account_id = ? AND product_id = ?';
+      res.send({
+        result: data.length > 0 ? true : false,
+      })
+    });
+  });
 
-        conn.query(sqlDelete, [req.body.account_id, req.body.product_id], (err, result) => {
-          res.send({
-            result: 'Remove from favourite',
-            status: 200
-          })
+  app.post('/api/add-favourite', function (req, res) {
+    let sqlInsert = 'INSERT INTO favourite SET ?';
+
+    conn.query(sqlInsert, req.body, (err, result) => {
+      if (!err) {
+        res.send({
+          result: 'Add to favourite',
+          status: 200
         })
       } else {
-        let sqlInsert = 'INSERT INTO favourite SET ?';
-
-        conn.query(sqlInsert, req.body, (err, result) => {
-          if (!err) {
-            res.send({
-              result: 'Add to favourite',
-              status: 200
-            })
-          } else {
-            res.send({
-              result: null,
-              status: 500
-            })
-          }
+        res.send({
+          result: null,
+          status: 500
         })
       }
-    });
+    })
+  });
 
+  app.post('/api/remove-favourite', function (req, res) {
+    let sqlDelete = 'DELETE FROM favourite WHERE account_id = ? AND product_id = ?';
+
+    conn.query(sqlDelete, [req.body.account_id, req.body.product_id], (err, result) => {
+      if (!err) {
+        res.send({
+          result: 'Remove from favourite',
+          status: 200
+        })
+      } else {
+        res.send({
+          result: 'Error',
+          status: 500
+        })
+      }
+    })
   });
 };

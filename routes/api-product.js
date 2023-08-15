@@ -8,16 +8,23 @@ module.exports = function (app) {
     let sort = req.query.sort;
     let order = req.query.order;
     let cat_id = req.query.cat_id;
+    let account_id = req.query.account_id;
     let search = req.query.search ? req.query.search : '';
 
     let sql = `
-      SELECT 
-        *, (price - sale_price) AS final_price
-      FROM product`;
+      SELECT
+        p.*, c.name AS category_name,
+        (price - sale_price) AS final_price,
+        count(f.id) as isFavorite
+      FROM category AS c
+      JOIN product AS p ON p.category_id = c.id
+      LEFT JOIN favourite f ON f.product_id = p.id`;
 
-    sql += ` WHERE name LIKE '%${search}%'`;
-    sql += cat_id ? ` && category_id = ${cat_id}` : '';
-    sql += sort ? ` ORDER BY ${sort} ${order}` : ` ORDER BY id ASC`;
+    sql += ` WHERE p.name LIKE '%${search}%'`;
+    sql += cat_id ? ` AND p.category_id = ${cat_id}` : '';
+    // sql += account_id ? ` AND f.account_id = ${account_id}` : '';
+    sql += ` GROUP BY p.id`;
+    sql += sort ? ` ORDER BY ${sort} ${order}` : ` ORDER BY p.id ASC`;
     sql += limit ? ` LIMIT ${limit}` : '';
 
     conn.query(sql, function (err, result) {
