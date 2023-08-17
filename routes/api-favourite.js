@@ -21,10 +21,13 @@ module.exports = function (app) {
     });
   });
 
-  app.post('/api/check-favourite', function (req, res) {
+  app.get('/api/check-favourite/:account_id/:product_id', function (req, res) {
+    let account_id = req.params.account_id;
+    let product_id = req.params.product_id;
+
     let sqlCheck = 'SELECT * FROM favourite WHERE account_id = ? AND product_id = ?';
 
-    conn.query(sqlCheck, [req.body.account_id, req.body.product_id], (err, data) => {
+    conn.query(sqlCheck, [account_id, product_id], (err, data) => {
       res.send({
         result: data.length > 0 ? true : false,
       })
@@ -49,7 +52,7 @@ module.exports = function (app) {
     })
   });
 
-  app.post('/api/remove-favourite', function (req, res) {
+  app.delete('/api/remove-favourite', function (req, res) {
     let sqlDelete = 'DELETE FROM favourite WHERE account_id = ? AND product_id = ?';
 
     conn.query(sqlDelete, [req.body.account_id, req.body.product_id], (err, result) => {
