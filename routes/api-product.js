@@ -51,7 +51,8 @@ module.exports = function (app) {
     let id = req.params.id;
     let sql = `
       SELECT
-      p.*, c.name AS category_name
+      p.*, c.name AS category_name,
+      (p.price - p.sale_price) AS final_price
       FROM category AS c
       JOIN product AS p ON p.category_id = c.id
       WHERE p.id = ?
