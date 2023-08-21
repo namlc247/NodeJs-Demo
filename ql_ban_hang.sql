@@ -43,6 +43,16 @@ CREATE TABLE favourite
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
+CREATE TABLE cart
+(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    account_id int NOT NULL,
+    product_id int NOT NULL,
+    quantity int DEFAULT 1,
+    FOREIGN KEY (account_id) REFERENCES account(id),
+    FOREIGN KEY (product_id) REFERENCES product(id)
+);
+
 INSERT INTO category
   (name, status) 
 VALUES 
@@ -78,8 +88,3 @@ INSERT INTO account
   (name, email, password) 
 VALUES 
   ('Admin', 'abc@gmail.com', '123');
-
-INSERT INTO favourite
-  (account_id, product_id)
-VALUES
-  (1, 2);
