@@ -21,6 +21,19 @@ module.exports = function (app) {
     });
   });
 
+  app.get('/api/total-favourite/:account_id', function (req, res) {
+    let acc_id = req.params.account_id;
+
+    let sql = `SELECT COUNT(*) AS total FROM favourite WHERE account_id = ${acc_id}`;
+
+    conn.query(sql, function (err, result) {
+      res.send({
+        result: result[0].total,
+        status: 200,
+      });
+    });
+  });
+
   app.get('/api/check-favourite/:account_id/:product_id', function (req, res) {
     let account_id = req.params.account_id;
     let product_id = req.params.product_id;

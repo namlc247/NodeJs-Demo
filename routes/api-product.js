@@ -8,7 +8,6 @@ module.exports = function (app) {
     let sort = req.query.sort;
     let order = req.query.order;
     let cat_id = req.query.cat_id;
-    let account_id = req.query.account_id;
     let search = req.query.search ? req.query.search : '';
 
     let sql = `
@@ -22,7 +21,6 @@ module.exports = function (app) {
 
     sql += ` WHERE p.name LIKE '%${search}%'`;
     sql += cat_id ? ` AND p.category_id = ${cat_id}` : '';
-    // sql += account_id ? ` AND f.account_id = ${account_id}` : '';
     sql += ` GROUP BY p.id`;
     sql += sort ? ` ORDER BY ${sort} ${order}` : ` ORDER BY p.id ASC`;
     sql += limit ? ` LIMIT ${limit}` : '';
