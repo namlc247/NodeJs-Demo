@@ -7,7 +7,8 @@ module.exports = function (app) {
     let sql = `
       SELECT
         p.*,
-        (p.price - p.sale_price) AS final_price
+        (p.price - p.sale_price) AS final_price,
+        quantity
       FROM product AS p
       JOIN cart AS ct ON ct.product_id = p.id`;
 
