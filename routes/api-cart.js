@@ -36,6 +36,24 @@ module.exports = function (app) {
     });
   });
 
+  app.get('/api/total-price/:account_id', function (req, res) {
+    let acc_id = req.params.account_id;
+
+    let sql = `
+      SELECT
+        SUM((p.price - p.sale_price) * ct.quantity) AS total
+      FROM product AS p
+      JOIN cart AS ct ON ct.product_id = p.id
+      WHERE ct.account_id = ${acc_id}`;
+
+    conn.query(sql, function (err, result) {
+      res.send({
+        result: result[0].total,
+        status: 200,
+      });
+    });
+  });
+
   app.get('/api/check-cart/:account_id/:product_id', function (req, res) {
     let account_id = req.params.account_id;
     let product_id = req.params.product_id;
