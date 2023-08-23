@@ -8,7 +8,8 @@ module.exports = function (app) {
       SELECT
         p.*,
         (p.price - p.sale_price) AS final_price,
-        quantity
+        quantity,
+        ct.id AS cart_id
       FROM product AS p
       JOIN cart AS ct ON ct.product_id = p.id`;
 
@@ -43,7 +44,7 @@ module.exports = function (app) {
 
     conn.query(sqlCheck, [account_id, product_id], (err, data) => {
       res.send({
-        result: data.length > 0 ? true : false,
+        result: data.length > 0 ? data[0].quantity : 0,
       })
     });
   });
@@ -88,8 +89,7 @@ module.exports = function (app) {
     let sqlUpdate = `
       UPDATE cart
       SET quantity = ${req.body.quantity}
-      WHERE account_id = ${req.body.account_id} AND product_id = ${req.body.product_id}
-    `;
+      WHERE account_id = ${req.body.account_id} AND product_id = ${req.body.product_id}`;
 
     conn.query(sqlUpdate, (err, result) => {
       if (!err) {
